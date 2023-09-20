@@ -65,18 +65,13 @@ func Test_Dequeue_Concurrency(t *testing.T) {
 	var popTailFailCount int32
 	var pushFailCount int32
 
-	var pushWg sync.WaitGroup
-	pushWg.Add(n)
-	for i := 0; i < n; i++ { // 测试写入并发
-		go func(index int) {
-			defer pushWg.Done()
-			ok := q.PushHead(index)
-			if !ok {
-				atomic.AddInt32(&pushFailCount, 1)
-			}
-		}(i)
+	for i := 0; i < n; i++ { // 测试写入，官方pushHead接口注明只能单一生产者
+		ok := q.PushHead(i)
+		if !ok {
+			atomic.AddInt32(&pushFailCount, 1)
+		}
 	}
-	pushWg.Wait()
+
 	assert.Equal(t, int32(n-size), pushFailCount)
 
 	var popWg sync.WaitGroup
