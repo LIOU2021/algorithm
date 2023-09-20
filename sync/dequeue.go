@@ -6,18 +6,24 @@ import (
 	"unsafe"
 )
 
-func NewPoolDequeue(initSize int) (p *PoolDequeue) {
+type PoolDequeueI interface {
+	PushHead(val any) bool
+	PopHead() (any, bool)
+	PopTail() (any, bool)
+}
+
+func NewPoolDequeue(initSize int) PoolDequeueI {
 	size := initSize
 	if initSize >= dequeueLimit {
 		// Can't make it any bigger.
 		size = dequeueLimit
 	}
 
-	p = &PoolDequeue{
+	p := &PoolDequeue{
 		vals: make([]eface, size),
 	}
 
-	return
+	return p
 }
 
 // PoolDequeue is a lock-free fixed-size single-producer,
