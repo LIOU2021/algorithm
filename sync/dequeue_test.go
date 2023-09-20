@@ -57,6 +57,51 @@ func Test_Dequeue(t *testing.T) {
 	assert.True(t, ok7)
 }
 
+func Test_Dequeue_Concurrency(t *testing.T) {
+	size := 8 // stack容量
+	n := 20   // 写入并发数量
+	q := NewPoolDequeue(size)
+	checkMap := sync.Map{}
+	var popTailFailCount int32
+	var pushFailCount int32
+
+	var pushWg sync.WaitGroup
+	pushWg.Add(n)
+	for i := 0; i < n; i++ { // 测试写入并发
+		go func(index int) {
+			defer pushWg.Done()
+			ok := q.PushHead(index)
+			if !ok {
+				atomic.AddInt32(&pushFailCount, 1)
+			}
+		}(i)
+	}
+	pushWg.Wait()
+	assert.Equal(t, int32(n-size), pushFailCount)
+
+	var popWg sync.WaitGroup
+	n2 := n + 2
+	popWg.Add(n2)
+	for i := 0; i < n2; i++ { // 测试读取并发
+		go func() {
+			defer popWg.Done()
+			v, ok := q.PopTail() // FIFO
+			if !ok {             // 没元素了
+				atomic.AddInt32(&popTailFailCount, 1)
+				return
+			}
+			// t.Log(v)
+			mapV, mapOk := checkMap.Load(v)
+			if mapOk {
+				checkMap.Store(v, mapV.(int)+1)
+			} else {
+				checkMap.Store(v, 1)
+			}
+		}()
+	}
+	popWg.Wait()
+	assert.Equal(t, int32(n2-size), popTailFailCount)
+}
 func Test_Dequeue_Official(t *testing.T) {
 	testPoolDequeue(t, testNewPoolDequeue(16))
 }
