@@ -9,6 +9,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func Test_IsPowerOfTwo(t *testing.T) {
+	assert.True(t, isPowerOfTwo(4))
+	assert.True(t, isPowerOfTwo(8))
+	assert.False(t, isPowerOfTwo(6))
+}
 func Test_Dequeue(t *testing.T) {
 	q := NewPoolDequeue(4)
 

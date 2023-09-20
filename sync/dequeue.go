@@ -2,6 +2,7 @@ package sync
 
 // 从GO官方sync.Pool 相关代码抓过来的
 import (
+	"log"
 	"sync/atomic"
 	"unsafe"
 )
@@ -12,11 +13,20 @@ type PoolDequeueI interface {
 	PopTail() (any, bool)
 }
 
+// Must be a power of 2
+func isPowerOfTwo(n int) bool {
+	return n > 0 && (n&(n-1)) == 0
+}
+
 func NewPoolDequeue(initSize int) PoolDequeueI {
 	size := initSize
 	if initSize >= dequeueLimit {
 		// Can't make it any bigger.
 		size = dequeueLimit
+	}
+
+	if !isPowerOfTwo(size) {
+		log.Fatal("PoolDequeue initSize must be a power of 2")
 	}
 
 	p := &PoolDequeue{
