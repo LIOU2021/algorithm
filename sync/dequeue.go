@@ -18,7 +18,7 @@ func isPowerOfTwo(n int) bool {
 	return n > 0 && (n&(n-1)) == 0
 }
 
-// stack资料结构，容量固定
+// ring buffer资料结构，容量固定
 // push一律推到head
 // pop可以head或是tail
 // 可作FIFO也可LIFO
