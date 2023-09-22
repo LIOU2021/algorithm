@@ -22,6 +22,10 @@ type PoolChain struct {
 	tail *PoolChainElt
 }
 
+func NewPoolChain() *PoolChain {
+	return &PoolChain{}
+}
+
 // 把双向链结构，元素放dequeue，每个节点都是一个dequeues(PoolDequeue)
 type PoolChainElt struct {
 	PoolDequeue
@@ -83,7 +87,8 @@ func (c *PoolChain) PushHead(val any) {
 	d2.vals = make([]eface, newSize)
 	c.head = d2                    // 新创建的dequeue节点将成为 PoolChain的head
 	storePoolChainElt(&d.next, d2) // 示意结果: node1 > node2(新创建的dequeue，目前PoolChain head的指向)
-	d2.PushHead(val)               // 将值塞入新创建的dequeue
+
+	d2.PushHead(val) // 将值塞入新创建的dequeue
 }
 
 // 如果不断PopHead，当head指向的dequeue已经没元素时，head的参考指标也不会改变，也不会销毁当前的dequeue
@@ -140,6 +145,7 @@ func (c *PoolChain) PopTail() (any, bool) {
 			// further than necessary.
 			storePoolChainElt(&d2.prev, nil) // 原本处于PoolChain左边数来第二个的node(*PoolChainElt)变成第一个，所以它的prev自然会是nil，毕竟是成为最左边了
 			// 原本处于PoolChain最左边旧的node(*PoolChainElt)就会没有被参考，等GC回收
+
 		}
 		d = d2 // 用重新排列过后PoolChain最左边的*PoolChainElt继续PopTail
 	}
