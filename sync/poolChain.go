@@ -90,7 +90,7 @@ func (c *PoolChain) PushHead(val any) {
 // 也就是 dequeue的容量只会越开越大
 func (c *PoolChain) PopHead() (any, bool) {
 	d := c.head
-	for d != nil {
+	for d != nil { // 当*PoolChainElt已经找到处于PoolChain最左边的时，就代表没资料了
 		// 执行c.head.PoolDequeue.PopHead()
 		if val, ok := d.PopHead(); ok {
 			return val, ok
