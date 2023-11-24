@@ -1,4 +1,4 @@
-package grca
+package gcra
 
 const gcraScript = `redis.replicate_commands()
 
