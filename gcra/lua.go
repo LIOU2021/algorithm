@@ -26,7 +26,7 @@ local allow_at = tat - burst_offset
 local diff = now - allow_at
 if diff < 0 then
     return {
-        0, -- allowed
+        0, -- not allowed
         0, -- remaining
         tostring(-diff) -- wait for
     }
