@@ -23,27 +23,28 @@ func DetectInit() {
 	})
 }
 
-func Detect(query string) string {
+func Detect(query string) (status string) {
 	level1 := 5  // 上升
 	level2 := 10 // 急升
 
-	can1, err1 := rl.Take(context.Background(), query, level2, emissionRate)
+	can1, err1 := rl.Take(context.Background(), query, level1, emissionRate)
 	if err1 != nil {
 		log.Fatal(err1)
 	}
 
-	if !can1 {
-		return "急升"
+	if can1 {
+		return ""
 	}
+	status = "上升"
 
-	can2, err2 := rl.Take(context.Background(), query, level1, emissionRate)
+	can2, err2 := rl.Take(context.Background(), query, level2, emissionRate)
 	if err2 != nil {
 		log.Fatal(err2)
 	}
 
 	if !can2 {
-		return "上升"
+		status = "急升"
 	}
 
-	return ""
+	return
 }

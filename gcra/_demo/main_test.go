@@ -15,7 +15,7 @@ func Test_API(t *testing.T) {
 	for i := 0; i < ln; i++ {
 
 		if i == 15 {
-			t.Log("sleep ...")
+			t.Log("sleep 2s ...")
 			time.Sleep(2 * time.Second)
 		}
 		resp, err := http.Get("http://127.0.0.1:8080?q=2330")
@@ -35,6 +35,6 @@ func Test_API(t *testing.T) {
 
 		data := &response{}
 		json.Unmarshal(b, data)
-		t.Logf("query: %s, status: %s", data.Query, data.Status)
+		t.Logf("%s, query: %s, status: %s", time.Now().Format(time.DateTime), data.Query, data.Status)
 	}
 }
