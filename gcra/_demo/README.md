@@ -17,25 +17,25 @@
     ```
 - output
     ```bash
-    main_test.go:38: query: 2330, status: 
-    main_test.go:38: query: 2330, status: 
-    main_test.go:38: query: 2330, status: 
-    main_test.go:38: query: 2330, status: 上升
-    main_test.go:38: query: 2330, status: 上升
-    main_test.go:38: query: 2330, status: 上升
-    main_test.go:38: query: 2330, status: 上升
-    main_test.go:38: query: 2330, status: 上升
-    main_test.go:38: query: 2330, status: 急升
-    main_test.go:38: query: 2330, status: 急升
-    main_test.go:38: query: 2330, status: 急升
-    main_test.go:38: query: 2330, status: 急升
-    main_test.go:38: query: 2330, status: 急升
-    main_test.go:38: query: 2330, status: 急升
-    main_test.go:38: query: 2330, status: 急升
-    main_test.go:18: sleep ...
-    main_test.go:38: query: 2330, status: 上升
-    main_test.go:38: query: 2330, status: 上升
-    main_test.go:38: query: 2330, status: 急升
-    main_test.go:38: query: 2330, status: 急升
-    main_test.go:38: query: 2330, status: 急升
+   main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 上升
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 上升
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 上升
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 上升
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 上升
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 急升
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 急升
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 急升
+    main_test.go:38: 2024-03-01 18:06:05, query: 2330, status: 急升
+    main_test.go:18: sleep 2s ...
+    main_test.go:38: 2024-03-01 18:06:07, query: 2330, status: 上升
+    main_test.go:38: 2024-03-01 18:06:07, query: 2330, status: 上升
+    main_test.go:38: 2024-03-01 18:06:07, query: 2330, status: 急升
+    main_test.go:38: 2024-03-01 18:06:07, query: 2330, status: 急升
+    main_test.go:38: 2024-03-01 18:06:07, query: 2330, status: 急升
     ```
