@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// buckets, 跟n越大，标准差就会明显越小，离散程度越低
-// 尽量让每个bucket平均负载
+// buckets, 跟n越大，两个不同buckets的jumpHash结果的标准差与离散程度就会明显越小
+// 为了尽量让每个bucket平均负载，buckets的设置不宜过小
 func Test_Jump(t *testing.T) {
 	buckets1 := 20
 	buckets2 := 21
