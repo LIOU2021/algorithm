@@ -24,6 +24,10 @@ func TestPriorityQueueOperations(t *testing.T) {
 	heap.Push(&pq, &item{Value: "test2", Priority: 1})
 	heap.Push(&pq, &item{Value: "test3", Priority: 4})
 
+	pq.Range(func(i int, data *item) { // 会根据Priority由小到大打印
+		t.Logf("index: %d, item: %+v\n", i, data)
+	})
+
 	if pq.Len() != 3 {
 		t.Errorf("Expected length after pushes to be 3, got %d", pq.Len())
 	}

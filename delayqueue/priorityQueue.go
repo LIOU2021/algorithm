@@ -21,6 +21,12 @@ func newPriorityQueue(capacity int) priorityQueue {
 	return make(priorityQueue, 0, capacity)
 }
 
+func (pq priorityQueue) Range(f func(index int, it *item)) {
+	for i, value := range pq {
+		f(i, value)
+	}
+}
+
 func (pq priorityQueue) Len() int {
 	return len(pq)
 }
