@@ -70,6 +70,8 @@ func (pq *priorityQueue) Pop() interface{} {
 	return item
 }
 
+// 当到期时，第一个回传值*item将不为nil
+// 当还未到期时，*item回传为nil，第二个回传值int64表达尚需等待时间
 func (pq *priorityQueue) PeekAndShift(max int64) (*item, int64) {
 	if pq.Len() == 0 {
 		return nil, 0

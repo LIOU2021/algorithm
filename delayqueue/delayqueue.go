@@ -30,6 +30,7 @@ func New(size int) *DelayQueue {
 	}
 }
 
+// 向队列中添加一个元素，并指定其过期时间
 // Offer inserts the element into the current queue.
 func (dq *DelayQueue) Offer(elem interface{}, expiration int64) {
 	item := &item{Value: elem, Priority: expiration}
@@ -47,6 +48,9 @@ func (dq *DelayQueue) Offer(elem interface{}, expiration int64) {
 	}
 }
 
+// 开始轮询队列，当元素过期时将其发送到通道C
+// 第一个参数是chan，作为关闭poll的讯号
+// 第二个参数nowF是要一个呼叫后回传现在时间戳记的func
 // Poll starts an infinite loop, in which it continually waits for an element
 // to expire and then send the expired element to the channel C.
 func (dq *DelayQueue) Poll(exitC chan struct{}, nowF func() int64) {
