@@ -21,6 +21,8 @@ func TestDelayQueueDemo(t *testing.T) {
 	for i := 0; i < 3; i++ {
 		t.Log(<-dq.C) // 打印顺序根据到期时间 task1 > task2 > task3
 	}
+
+	close(exitC) // 关闭dp.Poll()
 }
 
 func TestDelayQueue(t *testing.T) {
