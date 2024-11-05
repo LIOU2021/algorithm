@@ -65,7 +65,10 @@ func main() {
 	fmt.Printf("Has(mode3|mode8, mode8): %t\n", Has(mode3|mode8, mode8))                         // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode8事件
 	fmt.Printf("Has(mode3|mode8, mode3): %t\n", Has(mode3|mode8, mode3))                         // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode3事件
 	fmt.Printf("Has(mode3|mode8, mode4): %t\n", Has(mode3|mode8, mode4))                         // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode4事件
-	fmt.Printf("Has(mode3|mode8|mode7, mode3|mode8): %t\n", Has(mode3|mode8|mode7, mode3|mode8)) // 模拟发生了mode3跟model7跟mode8事件，接收到讯息后判别是否有同时发生mode3跟mode8事件
+	fmt.Printf("Has(mode3|mode8|mode7, mode3|mode8): %t\n", Has(mode3|mode8|mode7, mode3|mode8)) // 模拟发生了mode3跟model7跟mode8事件，接收到讯息后判别是否有发生mode3或mode8事件
+	fmt.Printf("Has(mode3|mode8|mode7, mode3|mode5): %t\n", Has(mode3|mode8|mode7, mode3|mode5)) // 模拟发生了mode3跟model7跟mode8事件，接收到讯息后判别是否有发生mode3或mode5事件
+	// 这里的has没法做到and的效果，比如模拟讯息同时发生A跟B这是做不到的，但可以做到同时发生A或B
+	fmt.Printf("Has(mode3|mode8|mode7, mode1|mode5): %t\n", Has(mode3|mode8|mode7, mode1|mode5)) // 模拟发生了mode3跟model7跟mode8事件，接收到讯息后判别是否有发生mode1或mode5事件
 
 	fmt.Println("=====================")
 
