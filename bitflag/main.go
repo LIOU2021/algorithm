@@ -61,10 +61,11 @@ func main() {
 
 	fmt.Println("=====================")
 
-	fmt.Printf("Has(mode1|mode2, mode1): %t\n", Has(mode1|mode2, mode1)) // 模拟发生了mode1跟mode2事件，接收到讯息后判别是否有mode1事件
-	fmt.Printf("Has(mode3|mode8, mode8): %t\n", Has(mode3|mode8, mode8)) // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode8事件
-	fmt.Printf("Has(mode3|mode8, mode3): %t\n", Has(mode3|mode8, mode3)) // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode3事件
-	fmt.Printf("Has(mode3|mode8, mode4): %t\n", Has(mode3|mode8, mode4)) // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode4事件
+	fmt.Printf("Has(mode1|mode2, mode1): %t\n", Has(mode1|mode2, mode1))                         // 模拟发生了mode1跟mode2事件，接收到讯息后判别是否有mode1事件
+	fmt.Printf("Has(mode3|mode8, mode8): %t\n", Has(mode3|mode8, mode8))                         // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode8事件
+	fmt.Printf("Has(mode3|mode8, mode3): %t\n", Has(mode3|mode8, mode3))                         // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode3事件
+	fmt.Printf("Has(mode3|mode8, mode4): %t\n", Has(mode3|mode8, mode4))                         // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode4事件
+	fmt.Printf("Has(mode3|mode8|mode7, mode3|mode8): %t\n", Has(mode3|mode8|mode7, mode3|mode8)) // 模拟发生了mode3跟model7跟mode8事件，接收到讯息后判别是否有同时发生mode3跟mode8事件
 
 	fmt.Println("=====================")
 
