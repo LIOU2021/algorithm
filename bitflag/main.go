@@ -59,7 +59,14 @@ func main() {
 	fmt.Println("啟用模式 5, 7, 8")
 	render(mode5 | mode7 | mode8)
 
-	fmt.Println("=============")
+	fmt.Println("=====================")
+
+	fmt.Printf("Has(mode1|mode2, mode1): %t\n", Has(mode1|mode2, mode1)) // 模拟发生了mode1跟mode2事件，接收到讯息后判别是否有mode1事件
+	fmt.Printf("Has(mode3|mode8, mode8): %t\n", Has(mode3|mode8, mode8)) // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode8事件
+	fmt.Printf("Has(mode3|mode8, mode3): %t\n", Has(mode3|mode8, mode3)) // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode3事件
+	fmt.Printf("Has(mode3|mode8, mode4): %t\n", Has(mode3|mode8, mode4)) // 模拟发生了mode3跟mode8事件，接收到讯息后判别是否有mode4事件
+
+	fmt.Println("=====================")
 
 	var a int
 	var b float64
@@ -80,4 +87,10 @@ func main() {
 	fmt.Printf("mode5: %d bytes. %08b, %v\n", unsafe.Sizeof(mode5), mode5, 0b10000)
 
 	fmt.Println(0b10000000, mode8)
+}
+
+// source: 模拟类似file system 或是异步传递来的msg, 可以一次传递多种类型进来
+// has: 判断是否有特定类型数据
+func Has(source, has uint8) bool {
+	return source&has != 0
 }
