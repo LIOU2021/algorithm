@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/dgryski/go-jump v0.0.0-20211018200510-ba001c3ffce0
+	github.com/google/uuid v1.6.0
 	github.com/hashicorp/golang-lru/v2 v2.0.7
 	github.com/huandu/skiplist v1.2.0
 	github.com/redis/go-redis/v9 v9.3.0
