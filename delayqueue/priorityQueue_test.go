@@ -20,33 +20,27 @@ func TestPriorityQueueOperations(t *testing.T) {
 	heap.Init(&pq)
 
 	// Test Push and Len
-	heap.Push(&pq, &item{Value: "test1", Priority: 3})
-	heap.Push(&pq, &item{Value: "test2", Priority: 1})
-	heap.Push(&pq, &item{Value: "test3", Priority: 4})
+	heap.Push(&pq, &item{Value: "test1", Priority: 30})
+	heap.Push(&pq, &item{Value: "test2", Priority: 10})
+	heap.Push(&pq, &item{Value: "test3", Priority: 40})
+	heap.Push(&pq, &item{Value: "test4", Priority: 20})
+
+	expectValue := []string{"test2", "test4", "test1", "test3"} // 根据Priority预期正确顺序
+	t.Logf("cap: %d, len: %d\n", cap(pq), len(pq))
 
 	pq.Range(func(i int, data *item) { // 会根据Priority由小到大打印
 		t.Logf("index: %d, item: %+v\n", i, data)
 	})
 
-	if pq.Len() != 3 {
-		t.Errorf("Expected length after pushes to be 3, got %d", pq.Len())
+	if pq.Len() != 4 {
+		t.Errorf("Expected length after pushes to be 4, got %d", pq.Len())
 	}
 
-	// Test order (Less)
-	if pq[0].Priority != 1 || pq[1].Priority != 3 || pq[2].Priority != 4 {
-		t.Errorf("Queue is not correctly ordered")
-	}
-
-	// Test Pop
-	item := heap.Pop(&pq).(*item)
-	if item.Priority != 1 || item.Value != "test2" {
-		t.Errorf("Expected to pop item with priority 1, got %d", item.Priority)
-	}
-
-	// Test Swap
-	pq.Swap(0, 1)
-	if pq[0].Priority != 4 || pq[1].Priority != 3 {
-		t.Errorf("Swap did not work correctly")
+	for i := 0; pq.Len() != 0; i++ {
+		it := heap.Pop(&pq).(*item)
+		if expectValue[i] != it.Value {
+			t.Errorf("ordered - index: %d, expect: %s, actual: %s\n", i, expectValue[i], it.Value)
+		}
 	}
 }
 func TestPriorityQueueGrowAndShrink(t *testing.T) {

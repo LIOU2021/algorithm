@@ -59,7 +59,7 @@ func (pq *priorityQueue) Pop() interface{} {
 	n := len(*pq)
 	c := cap(*pq)
 
-	if n < (c/2) && c > 25 {
+	if n < (c/2) && c > 25 { // 缩容策略
 		npq := make(priorityQueue, n, c/2)
 		copy(npq, *pq)
 		*pq = npq
