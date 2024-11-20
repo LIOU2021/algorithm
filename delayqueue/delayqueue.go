@@ -22,7 +22,7 @@ type DelayQueue struct {
 }
 
 // New creates an instance of delayQueue with the specified size.
-func New(size int) *DelayQueue {
+func NewDelayQueue(size int) *DelayQueue {
 	return &DelayQueue{
 		C:       make(chan interface{}),
 		pq:      newPriorityQueue(size),

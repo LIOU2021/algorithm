@@ -7,7 +7,7 @@ import (
 )
 
 func TestDelayQueueDemo(t *testing.T) {
-	dq := New(10)
+	dq := NewDelayQueue(10)
 	exitC := make(chan struct{})
 
 	go dq.Poll(exitC, func() int64 {
@@ -26,7 +26,7 @@ func TestDelayQueueDemo(t *testing.T) {
 }
 
 func TestDelayQueue(t *testing.T) {
-	dq := New(10)
+	dq := NewDelayQueue(10)
 	exitC := make(chan struct{})
 
 	go dq.Poll(exitC, func() int64 {
@@ -63,7 +63,7 @@ func TestDelayQueue(t *testing.T) {
 }
 
 func TestDelayQueueConcurrency(t *testing.T) {
-	dq := New(100)
+	dq := NewDelayQueue(100)
 	exitC := make(chan struct{})
 
 	go dq.Poll(exitC, func() int64 {
