@@ -29,7 +29,7 @@ import (
 
 const iterCount = 10000
 
-func init() {
+func init() { // 单纯测试时使用，调用NewPCG控制种子结果一致. 实际生产环境使用时别这么搞
 	r := rand.New(rand.NewPCG(0, 0))
 	randInt64n = r.Int64N
 }
@@ -181,4 +181,19 @@ func BenchmarkRandomWRRNext(b *testing.B) {
 			}
 		})
 	}
+}
+
+func TestWRR(t *testing.T) {
+	wrr := NewRandom()
+	wrr.Add("A", 30)
+	wrr.Add("B", 20)
+	wrr.Add("C", 15)
+	wrr.Add("D", 10)
+	wrr.Add("E", 5)
+
+	output := ""
+	for i := 0; i < 30; i++ {
+		output += wrr.Next().(string)
+	}
+	t.Log(output)
 }
