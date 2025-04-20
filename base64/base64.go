@@ -1,12 +1,18 @@
 package base64
 
 import (
+	rand2 "crypto/rand"
 	"encoding/base64"
+	"fmt"
+	"io"
 	"math/rand"
 	"time"
 )
 
-const encodeStd = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+const (
+	encodeStd = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+	BlockSize = 16
+)
 
 var encodeStd2 = ""
 
@@ -42,4 +48,29 @@ func EncodeToString(src string) string {
 func DecodeString(s string) (string, error) {
 	d, err := base64.NewEncoding(encodeStd2).DecodeString(s)
 	return string(d), err
+}
+
+func EncodeV2(src string) (string, error) {
+	cipherText := make([]byte, BlockSize+len(src))
+	iv := cipherText[:BlockSize]
+	if _, err := io.ReadFull(rand2.Reader, iv); err != nil {
+		return "", fmt.Errorf("could not encrypt: %v", err)
+	}
+	copy(cipherText[BlockSize:], src)
+	return EncodeToString(string(cipherText)), nil
+}
+
+func DecodeV2(s string) (string, error) {
+	cipherText, err := DecodeString(s)
+	if err != nil {
+		return "", fmt.Errorf("could not base64 decode: %v", err)
+	}
+
+	if len(cipherText) < BlockSize {
+		return "", fmt.Errorf("invalid ciphertext block size")
+	}
+
+	cipherText = cipherText[BlockSize:]
+
+	return cipherText, nil
 }
